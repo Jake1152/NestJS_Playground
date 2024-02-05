@@ -21,15 +21,23 @@ import { Controller, Get } from "@nestjs/common";
  * common library를 이용하여 다른 도구를 가져올 수 있다 Get 데코레이터
  *
  */
-// 파일이 분리되었으몰 export 키워드 추가!!
-@Controller()
+
+/**
+ * 컨트롤러 데코레이터 안에 넣은 모든 경로는 컨트롤러 내부에서 정의한 모든 경로 처리기에 적용된다
+ */
+@Controller("/app")
 export class AppController {
   /**
    * 누군가 route에 대해 요청할때마다 아래 메서드를 실행할 것이다.
    * 요청 응답을 위해 이 메서드에서 값을 반환한다.
    */
-  @Get()
+  @Get("/dfdf")
   getRootRoute() {
     return "Hi there!";
+  }
+
+  @Get("/bye")
+  getByeThere() {
+    return "bye there!";
   }
 }

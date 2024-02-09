@@ -26,8 +26,12 @@ let MessagesController = class MessagesController {
     createMessages(body) {
         return this.messagesService.create(body.content);
     }
-    getMessages(id) {
-        return this.messagesService.findOne(id);
+    async getMessages(id) {
+        const message = await this.messagesService.findOne(id);
+        if (!message) {
+            throw new common_1.NotFoundException('message not found');
+        }
+        return message;
     }
 };
 exports.MessagesController = MessagesController;
@@ -49,7 +53,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], MessagesController.prototype, "getMessages", null);
 exports.MessagesController = MessagesController = __decorate([
     (0, common_1.Controller)('messages'),

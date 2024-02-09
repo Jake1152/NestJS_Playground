@@ -1,8 +1,8 @@
-import { MessageRepository } from './messages.repository';
-export declare class MessageService {
-    messageRepo: MessageRepository;
+import { MessagesRepository } from './messages.repository';
+export declare class MessagesService {
+    messageRepo: MessagesRepository;
     constructor();
     findOne(id: string): Promise<any>;
-    finAll(id: string): Promise<any>;
+    findAll(): Promise<any>;
     create(content: string): Promise<void>;
 }

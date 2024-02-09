@@ -1,19 +1,19 @@
-import { MessageRepository } from './messages.repository';
+import { MessagesRepository } from './messages.repository';
 
-export class MessageService {
-  messageRepo: MessageRepository;
+export class MessagesService {
+  messageRepo: MessagesRepository;
 
   constructor() {
     // Service is creating its own depencies
     // Dont DO this on real apps
-    this.messageRepo = new MessageRepository();
+    this.messageRepo = new MessagesRepository();
   }
 
   findOne(id: string) {
     return this.messageRepo.findOne(id);
   }
 
-  finAll(id: string) {
+  findAll() {
     return this.messageRepo.findAll();
   }
 

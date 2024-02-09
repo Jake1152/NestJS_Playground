@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MessageRepository = void 0;
+exports.MessagesRepository = void 0;
 const promises_1 = require("fs/promises");
-class MessageRepository {
+class MessagesRepository {
     async findOne(id) {
         const contents = await (0, promises_1.readFile)('messages.json', 'utf8');
         const messages = JSON.parse(contents);
@@ -21,5 +21,5 @@ class MessageRepository {
         await (0, promises_1.writeFile)('messages.json', JSON.stringify(messages));
     }
 }
-exports.MessageRepository = MessageRepository;
+exports.MessagesRepository = MessagesRepository;
 //# sourceMappingURL=messages.repository.js.map

@@ -1,20 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MessageService = void 0;
+exports.MessagesService = void 0;
 const messages_repository_1 = require("./messages.repository");
-class MessageService {
+class MessagesService {
     constructor() {
-        this.messageRepo = new messages_repository_1.MessageRepository();
+        this.messageRepo = new messages_repository_1.MessagesRepository();
     }
     findOne(id) {
         return this.messageRepo.findOne(id);
     }
-    finAll(id) {
+    findAll() {
         return this.messageRepo.findAll();
     }
     create(content) {
         return this.messageRepo.create(content);
     }
 }
-exports.MessageService = MessageService;
+exports.MessagesService = MessagesService;
 //# sourceMappingURL=messages.service.js.map

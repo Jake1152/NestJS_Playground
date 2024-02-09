@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { CreateMessageDto } from './dtos/create-message.dto';
 
 /**
  * 컨트롤러 생성할 때 자동으로 여기에 추가된 메시지 문자열을 얻는다
@@ -16,8 +17,10 @@ export class MessagesController {
   @Get()
   listMessages() {}
 
+  // body: any 타입스크립트에서는 any를 쓰지 않아야 의미 있다
+  // 이 부분을 유효성검사가 포함된 dto타입으로 변경한다
   @Post()
-  createMessages(@Body() body: any) {
+  createMessages(@Body() body: CreateMessageDto) {
     console.log(body);
   }
 

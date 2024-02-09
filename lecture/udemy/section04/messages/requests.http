@@ -7,7 +7,7 @@ POST http://localhost:3000/messages
 content-Type: application/json
 
 {
-    "content": "hi there"
+    "content": 12313
 }
 
 

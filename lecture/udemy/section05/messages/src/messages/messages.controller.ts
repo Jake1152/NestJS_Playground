@@ -10,6 +10,14 @@ import { CreateMessageDto } from './dtos/create-message.dto';
 import { MessagesService } from './messages.service';
 
 /**
+ * DI container / Injection
+ *
+ * 컨트롤러는 클래스만 소비하기 때문에 컨트롤러를 컨테이너에 직접 등록할 필요가 없습니다.
+ * 우리는 결국 인스턴스를 생성하려고 시도할 것이다
+ * 그렇지 않으면 실제로 NEST가 자동으로 우리에게 적합하다고 한다
+ */
+
+/**
  * 컨트롤러 생성할 때 자동으로 여기에 추가된 메시지 문자열을 얻는다
  * 그러므로 @Controller('messages') 데코레이터 밑에 있는 MessageController 코드 블럭내에
  * 라우팅에 일일이 'meesages/'를 추가할 필요가 없다
@@ -22,12 +30,10 @@ import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
-  messagesService: MessagesService;
-
-  constructor() {
+  constructor(public messagesService: MessagesService) {
     // 실제 앱 사용 종송성 주입에서는 이 작업을 수행하지 않는다.
     // USE DEPENDENCY INJECTION
-    this.messagesService = new MessagesService();
+    this.messagesService = messagesService;
   }
 
   // 핵심은 return!!

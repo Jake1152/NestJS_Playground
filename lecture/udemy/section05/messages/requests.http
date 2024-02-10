@@ -7,7 +7,7 @@ POST http://localhost:3000/messages
 content-Type: application/json
 
 {
-    "content": "12313"
+    "content": "message after adding DI"
 }
 
 

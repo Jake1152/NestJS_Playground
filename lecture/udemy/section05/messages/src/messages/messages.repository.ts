@@ -1,11 +1,10 @@
 // 파일을 어떤식으로 저장할것인가?
+import { Injectable } from '@nestjs/common';
 import { readFile, writeFile } from 'fs/promises';
 
+@Injectable()
 export class MessagesRepository {
-  /**
-   *  하드 드라이브에서 데이터를 읽어와야하므로 비동기 함수로 선언 및 정의한다.
-   *
-   */
+  // 하드 드라이브에서 데이터를 읽어와야하므로 비동기 함수로 선언 및 정의한다.
   async findOne(id: string) {
     const contents = await readFile('messages.json', 'utf8');
     const messages = JSON.parse(contents);
@@ -17,15 +16,10 @@ export class MessagesRepository {
   async findAll() {
     const contents = await readFile('messages.json', 'utf8');
     const messages = JSON.parse(contents);
-    //a
     // 새로운 아이디를 임의로 생성
     return messages;
   }
 
-  /**
-   * 왜 id값을 random으로 만드는가
-   * random이더라도 기존에 있는 id값과 겹치게 되는 경우에는 어떻게 되는가?
-   */
   async create(content: string) {
     const contents = await readFile('messages.json', 'utf8');
     const messages = JSON.parse(contents);

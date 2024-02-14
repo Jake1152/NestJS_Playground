@@ -14,14 +14,14 @@ export class MessagesRepository {
   }
 
   async findAll() {
-    const contents = await readFile('messages.json', 'utf8');
+    const contents = await readFile('messagess.json', 'utf8');
     const messages = JSON.parse(contents);
     // 새로운 아이디를 임의로 생성
     return messages;
   }
 
   async create(content: string) {
-    const contents = await readFile('messages.json', 'utf8');
+    const contents = await readFile('messagess.json', 'utf8');
     const messages = JSON.parse(contents);
 
     const id = Math.floor(Math.random() * 999);

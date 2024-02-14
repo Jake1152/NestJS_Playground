@@ -16,12 +16,12 @@ let MessagesRepository = class MessagesRepository {
         return messages[id];
     }
     async findAll() {
-        const contents = await (0, promises_1.readFile)('messages.json', 'utf8');
+        const contents = await (0, promises_1.readFile)('messagess.json', 'utf8');
         const messages = JSON.parse(contents);
         return messages;
     }
     async create(content) {
-        const contents = await (0, promises_1.readFile)('messages.json', 'utf8');
+        const contents = await (0, promises_1.readFile)('messagess.json', 'utf8');
         const messages = JSON.parse(contents);
         const id = Math.floor(Math.random() * 999);
         messages[id] = { id, content };

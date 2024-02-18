@@ -3,6 +3,7 @@ content-type: application/json
 
 {
     "email": "test42@42.com",
-    "password": "asdfksdljfsdkl",
-    "test": true
+    "password": "asdfksdljfsdkl"
 }
+
+GET http://localhost:3000/auth/signup

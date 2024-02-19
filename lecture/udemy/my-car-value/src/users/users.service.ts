@@ -20,8 +20,17 @@ export class UsersService {
     // return this.repo.save(user);
   }
 
-  // find() {
-  //   const usersList = this.repo.find();
-  //   return usersList;
-  // }
+  findOne(id: number) {
+    // const usersList = this.repo.find();
+    // return usersList;
+    return this.repo.findOne(id);
+  }
+
+  find(email: string) {
+    return this.repo.find({ email });
+  }
+
+  update() {}
+
+  remove() {}
 }

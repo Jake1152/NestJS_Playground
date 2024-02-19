@@ -16,21 +16,46 @@ export class UsersService {
     // 사용자 인스턴스 생성, 파라미터로 제공된 데이터를 객체에 추가
     const user = this.repo.create({ email, password });
 
-    return this.repo.save({ email, password });
-    // return this.repo.save(user);
+    // return this.repo.save({ email, password });
+    return this.repo.save(user);
   }
 
   findOne(id: number) {
     // const usersList = this.repo.find();
     // return usersList;
-    return this.repo.findOne(id);
+    return this.repo.findOneBy({ id });
   }
 
   find(email: string) {
-    return this.repo.find({ email });
+    return this.repo.find({ where: { email } });
   }
 
-  update() {}
+  // update(
+  //   id: number,
+  //   newEmail: string,
+  //   newPassword: string,
+  //   newAge: number,
+  //   newName: number,
+  // ) {}
+
+  /**
+   *   Type helper가 Tyscript에서 정의된 거예요 이 파일이나
+      그런 것에 불러올 필요가 없어요
+      Partial Type helpe는 attrs이 어떤 개체든 될 수 있다는 걸 알려줍니다 
+      적어도 또는 아무것도 없는 개체요
+      사용자 클래스의 일부 속성이죠
+   */
+  async update(id: number, attrs: Partial<User>) {
+    const user = await this.repo.findOneBy({ id });
+    if (!user) {
+      throw new Error('user not found');
+    }
+    Object.assign(user, attrs);
+    return this.repo.save(user);
+  }
 
   remove() {}
 }
+
+const usersService = new UsersService({} as any);
+usersService.update(1, { email: 'sdf@42.com', password: '344werwersad' });

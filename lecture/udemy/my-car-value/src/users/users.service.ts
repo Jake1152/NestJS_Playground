@@ -16,7 +16,8 @@ export class UsersService {
     // 사용자 인스턴스 생성, 파라미터로 제공된 데이터를 객체에 추가
     const user = this.repo.create({ email, password });
 
-    return this.repo.save(user);
+    return this.repo.save({ email, password });
+    // return this.repo.save(user);
   }
 
   // find() {

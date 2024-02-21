@@ -54,7 +54,15 @@ export class UsersService {
     return this.repo.save(user);
   }
 
-  remove() {}
+  async remove(id: number) {
+    const user = await this.repo.findOneBy({ id });
+    // user를 찾지 못하였다면 이미 DB에서 삭제되었다는 의미이다
+    if (!user) {
+      throw new Error('user not found');
+    }
+    // remove hook 실행됨
+    return this.repo.remove(user);
+  }
 }
 
 const usersService = new UsersService({} as any);

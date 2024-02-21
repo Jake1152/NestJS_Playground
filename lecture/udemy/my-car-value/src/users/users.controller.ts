@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Patch,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 
@@ -12,9 +20,24 @@ export class UsersController {
     this.usersService.create(body.email, body.password);
   }
 
-  // @Get('signup')
-  // getUserList() {
-  //   const usersList = this.usersService.find();
-  //   return usersList;
-  // }
+  /**
+   * param id param 데코레이터 요청 경로에서 정보를 추출 가능
+   *
+   * e.g) /auth/123324325
+   * 문자열로 전달된 id 값을 number로 바꾸어서 service에 넘겨주어야한다.
+   */
+  @Get('/:id')
+  findUser(@Param('id') id: string) {
+    return this.usersService.findOne(parseInt(id));
+  }
+
+  /**
+   *
+   * @param email
+   * @returns user list
+   */
+  @Get()
+  findAllUsers(@Query('email') email: string) {
+    return this.usersService.find(email);
+  }
 }

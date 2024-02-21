@@ -21,8 +21,6 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    // const usersList = this.repo.find();
-    // return usersList;
     return this.repo.findOneBy({ id });
   }
 
@@ -46,7 +44,7 @@ export class UsersService {
       사용자 클래스의 일부 속성이죠
    */
   async update(id: number, attrs: Partial<User>) {
-    const user = await this.repo.findOneBy({ id });
+    const user = await this.findOne(id);
     if (!user) {
       throw new Error('user not found');
     }
@@ -55,7 +53,7 @@ export class UsersService {
   }
 
   async remove(id: number) {
-    const user = await this.repo.findOneBy({ id });
+    const user = await this.findOne(id);
     // user를 찾지 못하였다면 이미 DB에서 삭제되었다는 의미이다
     if (!user) {
       throw new Error('user not found');
@@ -64,6 +62,3 @@ export class UsersService {
     return this.repo.remove(user);
   }
 }
-
-const usersService = new UsersService({} as any);
-usersService.update(1, { email: 'sdf@42.com', password: '344werwersad' });

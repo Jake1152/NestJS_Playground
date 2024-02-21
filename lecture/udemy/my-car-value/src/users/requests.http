@@ -6,4 +6,10 @@ content-type: application/json
     "password": "test without instance"
 }
 
-# GET http://localhost:3000/auth/signup
+
+### Find a paritiular user with a given ID
+GET http://localhost:3000/auth/7
+
+
+### Find all users with a given ID
+GET http://localhost:3000/auth?email=test42@4222.com

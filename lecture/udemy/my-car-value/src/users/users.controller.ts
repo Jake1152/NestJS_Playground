@@ -7,8 +7,12 @@ import {
   Delete,
   Param,
   Query,
+  // NotFoundException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
 
 @Controller('auth') // 밑에 구현되는 메서드는 /auth/로 시작
@@ -27,6 +31,13 @@ export class UsersController {
    * e.g) /auth/123324325
    * 문자열로 전달된 id 값을 number로 바꾸어서 service에 넘겨주어야한다.
    */
+  /**
+   * Interceptors 적용
+   * response message에 대해서 instance를 JSON형태로 변환
+   * UseInterceptors, ClassSerializerInterceptor 두 툴은
+   *   나가는 응답을 가로채고 어떤 식으로든 처리하는 데 사용한다.
+   */
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/:id')
   findUser(@Param('id') id: string) {
     return this.usersService.findOne(parseInt(id));
@@ -45,5 +56,10 @@ export class UsersController {
   @Delete('/:id')
   removeUser(@Param('id') id: string) {
     return this.usersService.remove(parseInt(id));
+  }
+
+  @Patch('/:id')
+  updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
+    return this.usersService.update(parseInt(id), body);
   }
 }

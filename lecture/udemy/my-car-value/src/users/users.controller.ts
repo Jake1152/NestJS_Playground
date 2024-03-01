@@ -15,6 +15,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
 import { SerializeInterceptor } from '../interceptors/serialize.interceptor';
+import { UserDto } from './dtos/user.dto';
 
 @Controller('auth') // 밑에 구현되는 메서드는 /auth/로 시작
 export class UsersController {
@@ -43,7 +44,13 @@ export class UsersController {
    * => @UseInterceptors(SerializeInterceptor)
    *
    */
-  @UseInterceptors(SerializeInterceptor)
+  /**
+   * 강의자가 원하는 방식의 serialization
+   * @UseInterceptors(new SerializeInterceptor(UserDto))
+   *
+   */
+  @UseInterceptors(new SerializeInterceptor(UserDto))
+  // @UseInterceptors(SerializeInterceptor)
   @Get('/:id')
   findUser(@Param('id') id: string) {
     console.log('handler is running');

@@ -16,10 +16,17 @@ import { UserDto } from '../users/dtos/user.dto';
  */
 
 export class SerializeInterceptor implements NestInterceptor {
+  constructor(private dto: any) {
+    // console.log("Here is SerializeInterceptor's constrcutor");
+  }
+
   intercept(context: ExecutionContext, handler: CallHandler): Observable<any> {
+    // console.log(`In SerializeInterceptor, this.dto is`, this.dto);
+    // console.log(`In SerializeInterceptor, this.dto is ${this.dto}`);
     return handler.handle().pipe(
       map((data: any) => {
-        return plainToClass(UserDto, data, {
+        // return plainToClass(UserDto, data, {
+        return plainToClass(this.dto, data, {
           excludeExtraneousValues: true,
         });
       }),

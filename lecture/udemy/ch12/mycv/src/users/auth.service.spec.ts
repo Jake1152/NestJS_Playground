@@ -46,14 +46,22 @@ describe('AuthService', () => {
 
   // 적어도 하나의 배열 리턴 확인
   // done은 끝났는지 확인하는 용도의 파리미터
-  it("throws an error if user signs up with email that is in use", async (done) => {
-    fakeUsersService.find = () => Promise.resolve([{ id: 1, email: 'a', password: '1'} as User]);
+  it('throws an error if user signs up with email that is in use', async (done) => {
+    fakeUsersService.find = () =>
+      Promise.resolve([{ id: 1, email: 'a', password: '1' } as User]);
     try {
       await service.signup('asdf@asdf.com', 'asdf');
-
     } catch (err) {
       // done();
     }
   });
 
+  // signin test
+  it('throws if signin is called with an unused email', async (done) => {
+    try {
+      await service.signin('asdf@asdf.com', 'asdf');
+    } catch (err) {
+      done();
+    }
+  });
 });

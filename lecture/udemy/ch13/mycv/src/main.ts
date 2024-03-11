@@ -6,20 +6,12 @@ const cookieSession = require('cookie-session');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // setupApp(app);
-  app.use(
-    cookieSession({
-      keys: ['asdfasfd'],
-    }),
-  );
-  // -> to be in app.modules // validation pipe
-  app.useGlobalPipes();
-  (app as any).set('etag', false);
-  app.use((req, res, next) => {
-    res.removeHeader('x-powered-by');
-    res.removeHeader('date');
-    next();
-  });
+  // (app as any).set('etag', false);
+  // app.use((req, res, next) => {
+  //   res.removeHeader('x-powered-by');
+  //   res.removeHeader('date');
+  //   next();
+  // });
   await app.listen(3000);
 }
 bootstrap();

@@ -28,4 +28,30 @@ describe('Authentication System', () => {
         expect(email).toEqual(email);
       });
   });
+
+  // /**
+  //  *   @Get('/whoami')
+  //     @UseGuards(AuthGuard)
+  //     whoAmI(@CurrentUser() user: User) {
+  //       return user;
+  //     }
+  //  *
+  //  */
+  it('signup as a new user then get the currently logged in user', async () => {
+    const email = 'asd@asdf.com';
+
+    const res = await request(app.getHttpServer())
+      .post('/auth/singup')
+      .send({ email, password: 'asdf' })
+      .expect(201);
+
+    const cookie = res.get('Set-Cookie');
+
+    const { body } = await request(app.getHttpServer())
+      .get('/autj/whoami')
+      .set('Cookie', cookie)
+      .expect(200);
+
+    expect(body.email).toEqual(email);
+  });
 });

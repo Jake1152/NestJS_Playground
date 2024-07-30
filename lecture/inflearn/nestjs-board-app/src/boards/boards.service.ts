@@ -1,7 +1,14 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class BoardsService {}
+export class BoardsService {
+  // 바로 DB와 연결하지 않고 메모리에 담아서 처리
+  private boards = [];
+
+  getAllBoards() {
+    return this.boards;
+  }
+}
 
 // nest -g service boards
 

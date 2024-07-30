@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 
 // @Controller('boards')
@@ -43,11 +43,17 @@ import { BoardsService } from './boards.service';
  * 접근 제한자(public, protected, private)을 생성자(constructor) 파라미터에 선언하면
  * 접근 제한자가 사용된 생성자 파라미터는
  * 암묵적으로 클래스 프로퍼티로 선언된다.
+ *
+ * 생성자 안에서 의존성 주입
  */
 // # version 02
 @Controller('boards')
 export class BoardsController {
-  constructor(private boardsService: BoardsService) {
-    // this.boardsService.
+  // D.I
+  constructor(private boardsService: BoardsService) {}
+
+  @Get()
+  getAllBoards() {
+    return this.boardsService.getAllBoards();
   }
 }
